@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+.LuckiestGuy {
+  font-family: "Luckiest Guy", cursive;
+}
+.home-active {
+  overflow: hidden;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.home-active-text {
+  animation: slideText 0.4s ease forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.home-active-line {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 2px;
+  background: #5c3d3d;
+  animation: homeLineGrow 0.4s ease forwards;
+}
+
+@keyframes homeLineGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 40px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes slideText {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(10px);
+  }
 }
+
+.shop-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+}
+
+.shop-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 123, 156, 0.22);
+  box-shadow: 0 12px 30px rgba(92, 61, 61, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.shop-kicker {
+  margin: 0 0 4px;
+  color: #ff7b9c;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.shop-title {
+  margin: 0;
+  color: #5c3d3d;
+  font-family: "Luckiest Guy", cursive;
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+}
+
+.shop-description {
+  margin: 6px 0 0;
+  color: #8a6b6b;
+  font-size: 0.95rem;
+  max-width: 560px;
+}
+
+.shop-pill {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff7b9c, #ff9fb5);
+  color: white;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(255, 123, 156, 0.25);
+}
+
+.shop-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+}
+
+.shop-card-wrapper {
+  display: flex;
+}
+
+.shop-card {
+  width: 100%;
+  border-radius: 20px !important;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 123, 156, 0.18) !important;
+  box-shadow: 0 10px 24px rgba(92, 61, 61, 0.08) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(92, 61, 61, 0.12) !important;
+}
+
+.shop-card-media {
+  height: 220px;
+  object-fit: cover;
+}
+
+.shop-card-content {
+  padding: 16px 16px 18px !important;
+}
+
+.shop-card-title {
+  color: #5c3d3d !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.shop-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.shop-card-price {
+  color: #ff7b9c !important;
+  font-weight: 700 !important;
+}
+
+.shop-card-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fff4f7;
+  color: #c55b7b;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.shop-empty-state {
+  width: 100%;
+  padding: 28px;
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 123, 156, 0.18);
+  box-shadow: 0 10px 24px rgba(92, 61, 61, 0.08);
+}
+
+@media (min-width: 640px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .shop-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
