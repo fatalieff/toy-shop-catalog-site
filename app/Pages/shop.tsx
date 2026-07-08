@@ -25,10 +25,20 @@ type CurrencyCode = keyof typeof currencyMeta;
 type Product = {
   id: string;
   title: string;
+  description: string;
   price: number;
   currency: CurrencyCode;
   imageUrl: string;
   createdAt: number;
+};
+
+type ProductRecord = {
+  title?: string;
+  description?: string;
+  price?: number | string;
+  currency?: string;
+  imageUrl?: string;
+  createdAt?: number | string;
 };
 
 function formatPrice(price: number, currency: CurrencyCode) {
@@ -53,7 +63,7 @@ export default function ShopPage() {
     const unsubscribe = onValue(
       productsRef,
       (snapshot) => {
-        const data = snapshot.val() as Record<string, any> | null;
+        const data = snapshot.val() as Record<string, ProductRecord> | null;
         if (!data) {
           setProducts([]);
           setLoading(false);
@@ -61,12 +71,21 @@ export default function ShopPage() {
         }
 
         const arr = Object.entries(data).map(([id, val]) => {
-          const v = val as Record<string, any>;
-          const currency = (v.currency as CurrencyCode | undefined) ?? "USD";
+          const v = val ?? {};
+          const rawCurrency =
+            typeof v.currency === "string" ? v.currency.toUpperCase() : "";
+          const currency = Object.prototype.hasOwnProperty.call(
+            currencyMeta,
+            rawCurrency
+          )
+            ? (rawCurrency as CurrencyCode)
+            : "USD";
 
           return {
             id,
             title: v.title ?? "",
+            description:
+              typeof v.description === "string" ? v.description.trim() : "",
             price: Number(v.price) || 0,
             currency,
             imageUrl: v.imageUrl ?? "",
@@ -141,16 +160,21 @@ export default function ShopPage() {
                   image={p.imageUrl || "/placeholder.png"}
                   alt={p.title}
                   className="shop-card-media"
-                  sx={{ height: 220, objectFit: "cover" }}
+                  sx={{ height: 168, objectFit: "cover" }}
                 />
                 <CardContent className="shop-card-content">
-                  <Typography variant="h6" className="shop-card-title">
+                  <Typography className="shop-card-title">
                     {p.title}
                   </Typography>
+                  {p.description ? (
+                    <Typography className="shop-card-description">
+                      {p.description}
+                    </Typography>
+                  ) : null}
                   <div className="shop-card-footer">
                     <div className="shop-card-price-group">
                       <Typography className="shop-card-price">
-                        {currencyMeta[p.currency].symbol} {new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(p.price)}
+                        {formatPrice(p.price, p.currency)}
                       </Typography>
                     </div>
                   </div>
