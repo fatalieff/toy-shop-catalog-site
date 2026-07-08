@@ -32,67 +32,90 @@ export default function Page() {
     <Box component="section" sx={{ py: 10, px: { xs: 3, md: 10 }, bgcolor: '#FFF0F0' }}>
       <Paper
         elevation={0}
+        className="page-hero-float"
         sx={{
-          maxWidth: 900,
+          maxWidth: 1000,
           mx: 'auto',
           p: { xs: 4, md: 6 },
-          bgcolor: '#ffffffcc',
-          borderRadius: 4,
-          border: '1px solid #f1d4d4',
-          boxShadow: '0 30px 80px rgba(92,61,61,0.12)',
+          bgcolor: 'linear-gradient(135deg, #ffffff 0%, #fff7f7 100%)',
+          borderRadius: 5,
+          border: '1px solid #f5dede',
+          boxShadow: '0 25px 70px rgba(92,61,61,0.14)',
+          overflow: 'hidden',
         }}
       >
-        <Typography variant="overline" sx={{ color: '#C05B51', letterSpacing: '0.32em', mb: 2, display: 'block' }}>
-          Contact
-        </Typography>
-        <Typography variant="h3" component="h1" sx={{ fontFamily: 'LuckiestGuy', color: '#5C3D3D', mb: 2 }}>
-          Get in Touch
-        </Typography>
-        <Typography variant="body1" sx={{ color: '#8A6F6F', mb: 4, maxWidth: 720 }}>
-          You can reach us through the channels below.
-        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', gap: 4, mb: 4 }}>
+          <Box sx={{ maxWidth: 560 }}>
+            <Typography variant="overline" sx={{ color: '#C05B51', letterSpacing: '0.32em', mb: 1.5, display: 'block', fontWeight: 700 }}>
+              Contact
+            </Typography>
+            <Typography variant="h3" component="h1" className="page-stagger-1" sx={{ fontFamily: 'LuckiestGuy', color: '#5C3D3D', mb: 2, fontSize: { xs: '2rem', md: '2.6rem' } }}>
+              Let’s stay in touch
+            </Typography>
+            <Typography variant="body1" className="page-stagger-2" sx={{ color: '#8A6F6F', lineHeight: 1.8, fontSize: '1rem' }}>
+              We would love to hear from you. Reach out with questions, feedback, or anything lovely you have in mind.
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              minWidth: { md: 240 },
+              p: 2.5,
+              borderRadius: 3,
+              bgcolor: '#FFF5F5',
+              border: '1px solid #f6d8d8',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.7)',
+            }}
+          >
+            <Typography variant="subtitle2" sx={{ color: '#C05B51', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', mb: 1 }}>
+              Need help?
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#5C3D3D', lineHeight: 1.7 }}>
+              Our team is happy to assist with any toy or store questions.
+            </Typography>
+          </Box>
+        </Box>
 
         <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' } }}>
-          <Paper elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF5F5' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1 }}>
+          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-1" elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1.2 }}>
               <FaPhone />
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#5C3D3D' }}>
                 Phone
               </Typography>
             </Box>
-            <MuiLink href={`tel:${contact.phone}`} underline="none" sx={{ color: '#5C3D3D', '&:hover': { color: '#C05B51' } }}>
+            <MuiLink href={`tel:${contact.phone}`} underline="none" sx={{ color: '#5C3D3D', fontWeight: 600, '&:hover': { color: '#C05B51' } }}>
               {contact.phone}
             </MuiLink>
           </Paper>
 
-          <Paper elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF5F5' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1 }}>
+          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-2" elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1.2 }}>
               <FaEnvelope />
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#5C3D3D' }}>
                 Email
               </Typography>
             </Box>
-            <MuiLink href={`mailto:${contact.email}`} underline="none" sx={{ color: '#5C3D3D', '&:hover': { color: '#C05B51' } }}>
+            <MuiLink href={`mailto:${contact.email}`} underline="none" sx={{ color: '#5C3D3D', fontWeight: 600, '&:hover': { color: '#C05B51' } }}>
               {contact.email}
             </MuiLink>
           </Paper>
 
-          <Paper elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF5F5' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1 }}>
+          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-3" elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1.2 }}>
               <FaMapMarkerAlt />
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#5C3D3D' }}>
                 Address
               </Typography>
             </Box>
-            <Typography variant="body2" sx={{ color: '#5C3D3D' }}>
+            <Typography variant="body2" sx={{ color: '#5C3D3D', lineHeight: 1.7 }}>
               {contact.address}
             </Typography>
           </Paper>
         </Box>
 
-        {/* Social media links */}
         {(contact.instagram || contact.facebook || contact.x) && (
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 3 }}>
+          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
             {contact.instagram && (
               <MuiLink
                 href={contact.instagram}
@@ -103,12 +126,17 @@ export default function Page() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   gap: 1,
+                  px: 2.2,
+                  py: 1.3,
+                  borderRadius: 999,
                   color: '#5C3D3D',
                   textDecoration: 'none',
-                  '&:hover': { color: '#C05B51' },
+                  bgcolor: '#FFF5F5',
+                  border: '1px solid #f5dede',
+                  '&:hover': { color: '#C05B51', transform: 'translateY(-2px)' },
                 }}
               >
-                <FaInstagram size={32} />
+                <FaInstagram size={24} />
                 <Typography variant="caption">Instagram</Typography>
               </MuiLink>
             )}
@@ -122,12 +150,17 @@ export default function Page() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   gap: 1,
+                  px: 2.2,
+                  py: 1.3,
+                  borderRadius: 999,
                   color: '#5C3D3D',
                   textDecoration: 'none',
-                  '&:hover': { color: '#C05B51' },
+                  bgcolor: '#FFF5F5',
+                  border: '1px solid #f5dede',
+                  '&:hover': { color: '#C05B51', transform: 'translateY(-2px)' },
                 }}
               >
-                <FaFacebook size={32} />
+                <FaFacebook size={24} />
                 <Typography variant="caption">Facebook</Typography>
               </MuiLink>
             )}
@@ -141,12 +174,17 @@ export default function Page() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   gap: 1,
+                  px: 2.2,
+                  py: 1.3,
+                  borderRadius: 999,
                   color: '#5C3D3D',
                   textDecoration: 'none',
-                  '&:hover': { color: '#C05B51' },
+                  bgcolor: '#FFF5F5',
+                  border: '1px solid #f5dede',
+                  '&:hover': { color: '#C05B51', transform: 'translateY(-2px)' },
                 }}
               >
-                <FaTwitter size={32} />
+                <FaTwitter size={24} />
                 <Typography variant="caption">X</Typography>
               </MuiLink>
             )}

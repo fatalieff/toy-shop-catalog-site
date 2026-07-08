@@ -30,7 +30,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <aside className="w-64 h-[calc(100vh-38px)] max-h-[calc(100vh-38px)] bg-[#F9E6E6] flex flex-col rounded-4xl justify-between p-8 sticky mt-[19px] ml-[22px] overflow-hidden box-border">
+    <aside className="w-64 h-[calc(100vh-38px)] max-h-[calc(100vh-38px)] bg-[#F9E6E6] flex flex-col rounded-4xl justify-between p-8 sticky mt-[19px] ml-[22px] overflow-hidden box-border animate__animated animate__fadeInLeft">
       <div className="mt-4">
         <h1 className="text-4xl LuckiestGuy font-normal tracking-wider text-[#9A7272] text-center">
           TOYWORLD

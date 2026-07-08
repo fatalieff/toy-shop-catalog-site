@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 .poppins {
   font-family: "Poppins", sans-serif;
 }
@@ -138,24 +146,19 @@
 
 .shop-card-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
   margin-top: 12px;
+}
+
+.shop-card-price-group {
+  display: flex;
+  align-items: center;
 }
 
 .shop-card-price {
   color: #ff7b9c !important;
   font-weight: 700 !important;
-}
-
-.shop-card-badge {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #fff4f7;
-  color: #c55b7b;
-  font-size: 0.8rem;
-  font-weight: 600;
 }
 
 .shop-empty-state {
@@ -177,6 +180,82 @@
 @media (min-width: 900px) {
   .shop-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.page-transition {
+  min-height: 100%;
+}
+
+.page-transition-enter {
+  animation: pageTransitionEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-transition-exit {
+  animation: pageTransitionExit 0.2s ease both;
+}
+
+.page-hero-float {
+  animation: floatIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-card-pop {
+  animation: cardPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.page-stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.page-stagger-3 {
+  animation-delay: 0.3s;
+}
+
+@keyframes pageTransitionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageTransitionExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardPop {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 

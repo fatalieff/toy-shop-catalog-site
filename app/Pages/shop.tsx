@@ -12,8 +12,38 @@ import {
   Box,
 } from "@mui/material";
 
+const currencyMeta = {
+  AZN: { symbol: "₼", label: "AZN" },
+  USD: { symbol: "$", label: "USD" },
+  EUR: { symbol: "€", label: "EUR" },
+  GBP: { symbol: "£", label: "GBP" },
+  TRY: { symbol: "₺", label: "TRY" },
+} as const;
+
+type CurrencyCode = keyof typeof currencyMeta;
+
+type Product = {
+  id: string;
+  title: string;
+  price: number;
+  currency: CurrencyCode;
+  imageUrl: string;
+  createdAt: number;
+};
+
+function formatPrice(price: number, currency: CurrencyCode) {
+  const safePrice = Number.isFinite(price) ? price : 0;
+  const metadata = currencyMeta[currency] ?? currencyMeta.USD;
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(safePrice);
+
+  return `${metadata.symbol} ${formattedPrice}`;
+}
+
 export default function ShopPage() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,10 +62,13 @@ export default function ShopPage() {
 
         const arr = Object.entries(data).map(([id, val]) => {
           const v = val as Record<string, any>;
+          const currency = (v.currency as CurrencyCode | undefined) ?? "USD";
+
           return {
             id,
             title: v.title ?? "",
-            price: v.price ?? 0,
+            price: Number(v.price) || 0,
+            currency,
             imageUrl: v.imageUrl ?? "",
             createdAt: v.createdAt ? Number(v.createdAt) : 0,
           };
@@ -78,7 +111,7 @@ export default function ShopPage() {
 
   return (
     <div className="shop-shell">
-      <div className="shop-hero">
+      <div className="shop-hero page-hero-float">
         <div>
           <p className="shop-kicker">Toy Collection</p>
           <h1 className="shop-title">Find a playful favorite</h1>
@@ -90,7 +123,7 @@ export default function ShopPage() {
       </div>
 
       {products.length === 0 ? (
-        <Box className="shop-empty-state">
+        <Box className="shop-empty-state animate__animated animate__fadeInUp">
           <Typography className="poppins" sx={{ color: "#5c3d3d", fontWeight: 700 }}>
             No products found.
           </Typography>
@@ -100,8 +133,8 @@ export default function ShopPage() {
         </Box>
       ) : (
         <div className="shop-grid">
-          {products.map((p) => (
-            <div key={p.id} className="shop-card-wrapper">
+          {products.map((p, index) => (
+            <div key={p.id} className={`shop-card-wrapper page-card-pop ${index % 3 === 0 ? 'page-stagger-1' : index % 3 === 1 ? 'page-stagger-2' : 'page-stagger-3'}`}>
               <Card className="shop-card" elevation={0}>
                 <CardMedia
                   component="img"
@@ -115,8 +148,11 @@ export default function ShopPage() {
                     {p.title}
                   </Typography>
                   <div className="shop-card-footer">
-                    <Typography className="shop-card-price">${p.price}</Typography>
-                    <span className="shop-card-badge">Add to bag</span>
+                    <div className="shop-card-price-group">
+                      <Typography className="shop-card-price">
+                        {currencyMeta[p.currency].symbol} {new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(p.price)}
+                      </Typography>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

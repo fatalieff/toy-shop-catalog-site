@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Sidebar from "./components/Sidebar/sidebar";
+import PageTransition from "./components/PageTransition";
 import backgroundImage from "./assets/hero-section-bg.png";
 import "./globals.css";
 
@@ -16,6 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -40,7 +45,9 @@ export default function RootLayout({
           style={{ backgroundImage: `url(${backgroundImage.src})` }}
         >
           <Sidebar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
         </div>
       </body>
     </html>
