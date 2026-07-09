@@ -15,12 +15,13 @@ const defaultContact = {
 };
 
 type ContactInfo = typeof defaultContact;
+type ContactSnapshot = Partial<ContactInfo> | null;
 
 export default function Page() {
   const [contact, setContact] = useState<ContactInfo>(defaultContact);
 
   useEffect(() => {
-    const unsubscribe = subscribeContactInfo((value: any) => {
+    const unsubscribe = subscribeContactInfo((value: ContactSnapshot) => {
       if (!value) return;
       setContact((prev) => ({ ...prev, ...value }));
     });
@@ -29,22 +30,22 @@ export default function Page() {
   }, []);
 
   return (
-    <Box component="section" sx={{ py: 10, px: { xs: 3, md: 10 }, bgcolor: '#FFF0F0' }}>
+    <Box component="section" sx={{ py: { xs: 3, sm: 5, md: 8 }, px: { xs: 2, sm: 3, md: 8 }, bgcolor: 'transparent' }}>
       <Paper
         elevation={0}
         className="page-hero-float"
         sx={{
           maxWidth: 1000,
           mx: 'auto',
-          p: { xs: 4, md: 6 },
-          bgcolor: 'linear-gradient(135deg, #ffffff 0%, #fff7f7 100%)',
+          p: { xs: 2.5, sm: 4, md: 6 },
+          background: 'linear-gradient(135deg, #ffffff 0%, #fff7f7 100%)',
           borderRadius: 5,
           border: '1px solid #f5dede',
           boxShadow: '0 25px 70px rgba(92,61,61,0.14)',
           overflow: 'hidden',
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', gap: 4, mb: 4 }}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', gap: { xs: 2.5, md: 4 }, mb: { xs: 3, md: 4 } }}>
           <Box sx={{ maxWidth: 560 }}>
             <Typography variant="overline" sx={{ color: '#C05B51', letterSpacing: '0.32em', mb: 1.5, display: 'block', fontWeight: 700 }}>
               Contact
@@ -59,8 +60,9 @@ export default function Page() {
 
           <Box
             sx={{
+              width: { xs: '100%', md: 'auto' },
               minWidth: { md: 240 },
-              p: 2.5,
+              p: { xs: 2, sm: 2.5 },
               borderRadius: 3,
               bgcolor: '#FFF5F5',
               border: '1px solid #f6d8d8',
@@ -76,8 +78,8 @@ export default function Page() {
           </Box>
         </Box>
 
-        <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' } }}>
-          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-1" elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
+        <Box sx={{ display: 'grid', gap: { xs: 2, md: 3 }, gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' } }}>
+          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-1" elevation={0} sx={{ p: { xs: 2.25, sm: 3 }, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1.2 }}>
               <FaPhone />
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#5C3D3D' }}>
@@ -89,7 +91,7 @@ export default function Page() {
             </MuiLink>
           </Paper>
 
-          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-2" elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
+          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-2" elevation={0} sx={{ p: { xs: 2.25, sm: 3 }, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1.2 }}>
               <FaEnvelope />
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#5C3D3D' }}>
@@ -101,7 +103,7 @@ export default function Page() {
             </MuiLink>
           </Paper>
 
-          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-3" elevation={0} sx={{ p: 3, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
+          <Paper className="transform transition-transform duration-200 hover:scale-105 page-stagger-3" elevation={0} sx={{ p: { xs: 2.25, sm: 3 }, border: '1px solid #F1D4D4', bgcolor: '#FFF9F9', borderRadius: 3, boxShadow: '0 12px 30px rgba(92,61,61,0.06)' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#C05B51', mb: 1.2 }}>
               <FaMapMarkerAlt />
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#5C3D3D' }}>
@@ -115,7 +117,7 @@ export default function Page() {
         </Box>
 
         {(contact.instagram || contact.facebook || contact.x) && (
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+          <Box sx={{ mt: { xs: 3, md: 4 }, display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
             {contact.instagram && (
               <MuiLink
                 href={contact.instagram}

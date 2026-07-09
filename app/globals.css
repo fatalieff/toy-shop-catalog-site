@@ -55,15 +55,15 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 16px;
+  padding: 12px 0 16px;
   max-width: 1180px;
   margin: 0 auto;
 }
 
 .shop-hero {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
   padding: 14px 16px;
   border-radius: 18px;
@@ -195,6 +195,16 @@ body {
 }
 
 @media (min-width: 640px) {
+  .shop-shell {
+    padding: 16px 0 22px;
+  }
+
+  .shop-hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .shop-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -208,6 +218,28 @@ body {
 
 .page-transition {
   min-height: 100%;
+}
+
+@media (max-width: 639px) {
+  .shop-title {
+    font-size: 1.35rem;
+  }
+
+  .shop-description {
+    max-width: none;
+  }
+
+  .shop-pill {
+    white-space: normal;
+  }
+
+  .shop-card:hover {
+    transform: none;
+  }
+
+  .page-transition {
+    min-height: auto;
+  }
 }
 
 .page-transition-enter {

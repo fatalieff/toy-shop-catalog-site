@@ -41,11 +41,11 @@ export default function RootLayout({
       </head>
       <body>
         <div
-          className="flex min-h-screen bg-[#FFF0F0] bg-cover bg-center"
+          className="flex min-h-screen flex-col bg-[#FFF0F0] bg-cover bg-center md:flex-row"
           style={{ backgroundImage: `url(${backgroundImage.src})` }}
         >
           <Sidebar />
-          <main className="flex-1">
+          <main className="min-w-0 flex-1 px-4 pb-4 md:px-0 md:pb-0">
             <PageTransition>{children}</PageTransition>
           </main>
         </div>
